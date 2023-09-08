@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormUserController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\XmlExportController;
 
 
 /*
@@ -29,4 +31,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('see-more/{id}', [HomeController::class, 'detail']);
+
+/*Route::get('details/{id}', [HomeController::class, 'detailform']);*/
+// routes/web.php or routes/api.php
+Route::get('/download-xml', [XmlExportController::class,'downloadXml']);
+

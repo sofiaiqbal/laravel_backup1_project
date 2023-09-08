@@ -69,9 +69,9 @@
   <div class="modal fade" id="formModal" tabindex="1" role="dialog" aria-hidden="true" >
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
-        <div class="modal-body"id = "butn">
-          <div class="account-form-area">
-            <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close" id = "butn"><i class="las la-times"></i></button>
+        <div class="modal-body" id ="formBtn">
+          <div class="account-form-area" id = "butn">
+            <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close" ><i class="las la-times"></i></button>
             <h3 class="title">Hi, Please fill the below details to Enter the giveaway</h3>
             <div class="account-form-wrapper">
               <form id = "frm">
@@ -90,13 +90,13 @@
                 </div>
                 <div class="form-group">
                   <label>Phone <sup>*</sup></label>
-                  <input type="text" name="phonenumber" id="login_pass" placeholder="password">
+                  <input type="text" name="phonenumber" id="login_pass" placeholder="Enter your phone number">
                 </div>
                 <div class="form-group">
                   <label>Zip Code <sup>*</sup></label>
-                  <input type="text" name="zipcode" id="login_pass" placeholder="password">
+                  <input type="text" name="zipcode" id="login_pass" placeholder="Enter your zipcode">
                 </div>
-                <div class="form-group text-center mt-5">
+                <div class="form-group text-center mt-5" id = "btn">
                   <button class="cmn-btn" >Submit</button>
                 </div>
               </form>
@@ -109,29 +109,40 @@
   <div id = "message"></div>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script>
+    $(document).ready(function() {
+    // Hide the form initially
+    $('#formBtn').show();
     jQuery('#frm').submit(function(e){
       e.preventDefault();
+     // jQuery("#butn").attr('disabled',true);
       jQuery("#btn").attr('disabled',true);
       jQuery("#btn").attr('value',"Please wait....");
+      //$('#butn').show();
       jQuery.ajax({
         url:"{{url('form-submit')}}",
         data:jQuery('#frm').serialize(),
         type:'post',
         success:function(result){
-          $('#frm').hide();
-          
-          $('#butn').hide();
+          //$('#frm').hide();
+         // jQuery("#butn").attr('disabled',true);
           toastr.success(result.message, 'Success');
-          jQuery('#frm')['0'].reset();
-          jQuery("#btn").attr('disabled',false);
-          jQuery("#btn").attr('value',"Submit");
+          $('#frm').show();
+          $('#frm')[0].reset();
+         // jQuery('#frm')['0'].reset();
+          $('#butn').hide();
+          //jQuery("#btn").attr('disabled',false);
+          //jQuery("#btn").attr('value',"Submit");
         },
+        //$('#butn').show();
         error: function (xhr, status, error) {
         // Show an error Toastr notification
         toastr.error('Error saving data', 'Error');
-    }
-      })
+    } 
+      });
+        //$('#butn').show();
+          //$('#formModal').show();
     });
+  });
   </script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

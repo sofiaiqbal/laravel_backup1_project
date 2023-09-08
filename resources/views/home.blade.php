@@ -20,36 +20,28 @@
                         <div class="card-body">
                             <table class="table table-striped table-bordered">
                                 <thead>
-                                    @foreach ($form_users as $blog)
                                     <tr style="padding: 10px; white-space: normal;">
                                         <th>Id</th>
-                                        <td style="padding: 10px; white-space: normal;">{{ $blog->id}}</td>
-                                    </tr>
-                                    <tr>
                                         <th>First Name</th>
-                                        <td style="padding: 10px; white-space: normal;">{{ $blog->firstname}}</td>
                                     </tr>
-                                    <tr>
-                                        <th>Last Name</th>
-                                        <td style="padding: 10px; white-space: normal;">{{ $blog->lastname}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Email</th>
-                                        <td style="padding: 10px; white-space: normal;">{{ $blog->email}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Phone Number</th>
-                                        <td style="padding: 10px; white-space: normal;">{{ $blog->phonenumber}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Zip code</th>
-                                        <td style="padding: 10px; white-space: normal;">{{ $blog->zipcode}}</td>
-                                    </tr>
-                                    @endforeach
                                 </thead>
+                                <tbody>
+                                    @foreach ($form_users as $blog)
+                                    <tr><td style="padding: 10px; white-space: normal;">{{ $blog->id}}</td>
+                                        
+                                        <td style="padding: 10px; white-space: normal;">{{ $blog->firstname}}</td>
+                                        <td><a href="{{ url('see-more/'.$blog->id) }}" class="btn btn-success">Click to see more</a></td> 
+                                    </tr> 
+                                    @endforeach 
+                                </tbody> 
                             </table>
                         </div>
                         </form>    
+                        </div>
+                        <div colspan = "2" style="text-align: right;"><a href="{{ url('download-xml/') }}">Download XML</a>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            {{ $form_users->links('vendor.pagination.simple-default') }}
                         </div>
                 </div>
             </div>

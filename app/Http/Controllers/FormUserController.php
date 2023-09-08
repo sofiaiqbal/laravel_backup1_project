@@ -30,6 +30,6 @@ class FormUserController extends Controller
         $form_users->phonenumber = $phonenumber;
         $form_users->zipcode = $zipcode;
         $form_users->save();
-        return ["message"=>"Data Inserted"];
+        return ["message"=>"Successfully submitted"];
     }
 }
