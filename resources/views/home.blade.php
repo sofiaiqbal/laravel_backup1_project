@@ -29,18 +29,18 @@
                                 </thead>
                                 <tbody>
                                     @php
-                                    $counter = 1; // Initialize the counter
+                                    $counter = ($form_users->currentPage() - 1) * $form_users->perPage(); // Initialize the counter
                                 @endphp
                                     @foreach ($form_users as $blog)
+                                    @php
+                                    $counter++; // Increment the counter
+                                        @endphp
                                     <tr>
                                         <td style="padding: 10px; white-space: normal; text-align: right;">{{ $counter}}</td>
                                         <td style="padding: 10px; white-space: normal; text-align: right;">{{ $blog->firstname}}</td>
                                         <td style="padding: 10px; white-space: normal; text-align: right;">{{ $blog->lastname}}</td>
                                         <td style="text-align: right;"><a href="{{ url('see-more/'.$blog->id) }}" class="btn btn-link" >Click to see more</a></td> 
                                     </tr> 
-                                    @php
-                                     $counter++; // Increment the counter
-                                        @endphp
                                     @endforeach
                                 </tbody> 
                             </table> 
