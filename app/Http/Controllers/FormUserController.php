@@ -18,6 +18,7 @@ class FormUserController extends Controller
     {
         $form_users = new FormUser();
         // If no data exists, create and store the new data row
+       // $form_users->entry_order = FormUser::count() + 1;
         $firstname = $request->input('firstname');
         $lastname = $request->input('lastname');
         $email = $request->input('email');

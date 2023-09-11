@@ -13,7 +13,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    <nav><div colspan = "2" style="text-align: right; margin-bottom: 20px;">
+                        <a href="{{ route('export.excel') }}" class="btn btn-primary">Download Excel</a>
+                    </div></nav>
                     <div class="card">
                         <form action="" method="post">
                             @csrf
@@ -21,28 +23,35 @@
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr style="padding: 10px; white-space: normal;">
-                                        <th>Id</th>
-                                        <th>First Name</th>
+                                        <th style="text-align: right;">Id</th>
+                                        <th style="text-align: right;">First Name</th>
+                                        <th style="text-align: right;">Last Name</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                    $counter = 1; // Initialize the counter
+                                @endphp
                                     @foreach ($form_users as $blog)
-                                    <tr><td style="padding: 10px; white-space: normal;">{{ $blog->id}}</td>
-                                        
-                                        <td style="padding: 10px; white-space: normal;">{{ $blog->firstname}}</td>
-                                        <td><a href="{{ url('see-more/'.$blog->id) }}" class="btn btn-success">Click to see more</a></td> 
+                                    <tr>
+                                        <td style="padding: 10px; white-space: normal; text-align: right;">{{ $counter}}</td>
+                                        <td style="padding: 10px; white-space: normal; text-align: right;">{{ $blog->firstname}}</td>
+                                        <td style="padding: 10px; white-space: normal; text-align: right;">{{ $blog->lastname}}</td>
+                                        <td style="text-align: right;"><a href="{{ url('see-more/'.$blog->id) }}" class="btn btn-link" >Click to see more</a></td> 
                                     </tr> 
-                                    @endforeach 
+                                    @php
+                                     $counter++; // Increment the counter
+                                        @endphp
+                                    @endforeach
                                 </tbody> 
-                            </table>
+                            </table> 
+                            <div class="d-flex justify-content-center col-mt-6" style="margin-top: 20px;" >
+                                {{ $form_users->links('vendor.pagination.simple-default') }}
+                            </div>
                         </div>
                         </form>    
                         </div>
-                        <div colspan = "2" style="text-align: right;"><a href="{{ url('download-xml/') }}">Download XML</a>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            {{ $form_users->links('vendor.pagination.simple-default') }}
-                        </div>
+                        
                 </div>
             </div>
         </div>
