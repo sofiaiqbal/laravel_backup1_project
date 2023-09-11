@@ -26,12 +26,11 @@ class DashboardExport implements FromCollection, WithHeadings, WithStyles
         return [
             'First Name',
             'Last Name',
-            'Email',
             'Phone Number',
+            'Email',
             'Zip Code'
         ];
     }
-
     public function styles(Worksheet $sheet)
     {
         return [
